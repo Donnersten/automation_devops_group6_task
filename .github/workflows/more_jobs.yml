@@ -5,7 +5,7 @@ name: more_jobs
 
 on:
   schedule:
-    - cron: '22 14 * * 1,2,3'
+    - cron: '25 13 * * 1,2,3'
 
   workflow_dispatch:
 
@@ -17,8 +17,18 @@ jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: Not on Monday to Wensday
-        if: github.event.schedule != '15 13 * * 1,2,3'
-        run: echo "This step will be skipped on Monday and Wednesday"
-      - name: Every time
-        run: echo "This step will always run"
+      - name: Print current day
+        run: echo "Today is $(date +'%A')"
+
+      - name: Only run on Monday–Wednesday
+        run: |
+          day=$(date +%u)  # 1=måndag, 2=tisdag, 3=onsdag
+          if [ $day -le 3 ]; then
+            echo "Running on Monday–Wednesday"
+          else
+            echo "Not Monday–Wednesday, skipping"
+            exit 0
+          fi
+
+      - name: Always run
+        run: echo "This step always runs"
