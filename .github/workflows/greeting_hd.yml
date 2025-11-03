@@ -15,7 +15,7 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      - name: "Say Hello Mona it's Monday"
+      - name: "Say Hello Hampus it's Monday"
         run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
       
       - name: "I dont like Monday"
