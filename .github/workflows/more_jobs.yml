@@ -13,10 +13,11 @@ on:
 env:
   DAY_OF_WEEK: Monday
   First_Name: Hampus
+  GREETING: Hello 
 
 jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
       - name: Print current day
-        run: echo "Today is $DAY_OF_WEEK"
+        run: echo "$GREETING $First_Name. Today is $DAY_OF_WEEK"
