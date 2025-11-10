@@ -39,6 +39,7 @@ jobs:
       - name: Build Docker images
         run: |
           echo "Alla tester är klara! Bygger $APP_NAME"
+          docker build -t $APP_NAME:latest .
           
   log_error:
      runs-on: ubuntu-latest
