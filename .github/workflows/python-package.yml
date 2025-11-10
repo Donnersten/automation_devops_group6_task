@@ -39,4 +39,15 @@ jobs:
       - name: Build Docker images
         run: |
           echo "Alla tester är klara! Bygger $APP_NAME"
-          docker build -t $APP_NAME:latest .
+          
+  log_error:
+     runs-on: ubuntu-latest
+     needs: test 
+     if: failure() && github.event.inputs.log_errors == 'true'
+     steps:
+       - uses: actions/checkout@v4
+       - name: Skapar loggfil 
+         run: echo "Tester misslyckades, logg sparad." > error_log.txt
+    
+    
+ 
