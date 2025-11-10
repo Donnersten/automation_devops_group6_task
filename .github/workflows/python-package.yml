@@ -3,10 +3,9 @@ name: Run Pytest
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-         
+    branches: [ hd_de24 ]
+  
+  workflow_dispatch:    
 
 env:
  APP_NAME: wether-app 
