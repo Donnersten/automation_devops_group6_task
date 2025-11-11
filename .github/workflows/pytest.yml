@@ -18,7 +18,7 @@ on:
 
 env:
  APP_NAME: wether-app 
- GREETINGS: "Running unitest"
+ GREETINGS: "Kör tester"
 
 jobs:
   test:
