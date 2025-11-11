@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: |
           echo "$GREETINGS"
-          pytest pytest test_wether_integration.py test_wether_unitest.py
+          pytest test_wether_integration.py test_wether_unitest.py
 
   build:
     runs-on: ubuntu-latest
