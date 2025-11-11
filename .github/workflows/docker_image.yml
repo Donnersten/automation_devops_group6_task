@@ -2,7 +2,7 @@ name: docker_image
 
 on:
    workflow_run:
-      workflows: [Run Pytest]
+      workflows: [pytest]
       types:
          - completed
 jobs:
