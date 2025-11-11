@@ -10,7 +10,7 @@ on:
       log_errors:
         description: "Skapa loggfil vid testfel?"
         required: true
-        default: "false"
+        default: "true"
         type: choice
         options:
           - "true"
