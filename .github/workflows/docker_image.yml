@@ -1,27 +1,33 @@
 name: docker_image
 
 on:
-   workflow_run:
-      workflows: [pytest]
-      types:
-         - completed
+  workflow_run:
+    workflows: [pytest]
+    types:
+      - completed
+
 jobs:
-  docker:
+  on-success:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      -
-        name: Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      -
-        name: Set up QEMU
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
           tags: donnersten/wetherapp-project:latest
+
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'Test misslyckades. Inget repo byggt i dockerhub'
