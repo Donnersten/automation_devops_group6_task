@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: |
           echo "$GREETINGS"
-          pytest test_wether_integration.py test_wether_unitest.py
+          pytest test_wether_integration.py test_wether_unitest.py test_fail.py
 
   build:
     runs-on: ubuntu-latest
@@ -56,13 +56,14 @@ jobs:
      steps:
        - uses: actions/checkout@v4
        - name: Skapar loggfil 
-         run: echo "Tester misslyckades, logg sparad." > error_log.txt
+         run: |
+           pytest -v > error_log.txt 2>&1 || true
 
 
        - name: Ladda upp logg som artefakt
          uses: actions/upload-artifact@v4
          with:
-          name: pytest-error-log
+          name: Pytest error log
           path: error_log.txt
     
     
