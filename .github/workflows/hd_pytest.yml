@@ -46,8 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker images
-        run: |
-          echo "Alla tester är klara! Bygger $APP_NAME"
+        run: echo "Tester misslyckades, logg sparad." > error_log.txt
           
   log_error:
      runs-on: ubuntu-latest
