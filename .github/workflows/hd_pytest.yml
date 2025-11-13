@@ -50,7 +50,7 @@ jobs:
           pytest test_weather_integration.py test_weather_unit.py test_fail.py \
             --doctest-modules \
             --junitxml=junit/test-results.xml \
-            --cov=com \
+            --cov=. \
             --cov-report=xml \
             --cov-report=html \
             > pytest_output.log 2>&1
