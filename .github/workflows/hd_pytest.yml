@@ -37,7 +37,7 @@ jobs:
         run: |
           set -o pipefail
           echo "$GREETINGS"
-          pytest test_weather_integration.py test_weather_unit.py test_fail.py \
+          pytest test_wether_integration.py test_wether_unitest.py test_fail.py \
            > pytest_output.log 2>&1
 
       - name: Ladda upp pytest log
