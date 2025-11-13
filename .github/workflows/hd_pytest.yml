@@ -25,13 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug
-        run: |
-          echo "PWD"
-          pwd
-          echo "Lista filer:"
-          ls -R
-      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -40,19 +33,12 @@ jobs:
       - name: Installera paket
         run: pip install -r requirements.txt
       
-      - name: Debug
-        run: pip list
-      
       - name: Kör pytest
         run: |
           set -o pipefail
           echo "$GREETINGS"
           pytest test_weather_integration.py test_weather_unit.py test_fail.py \
-            --doctest-modules \
-            --junitxml=junit/test-results.xml \
-            --cov=com \
-            --cov-report=xml \
-            --cov-report=html > pytest_output.log 2>&1
+           > pytest_output.log 2>&1
 
       - name: Ladda upp pytest log
         if: always() && failure() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.log_errors == 'true'))
