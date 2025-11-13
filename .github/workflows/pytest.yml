@@ -32,6 +32,7 @@ jobs:
       
       - name: Kör pytest
         run: |
+          pip install pytest pytest-cov
           pytest test_wether_integration.py test_wether_unitest.py \
             --doctest-modules \
             --junitxml=junit/test-results.xml \
