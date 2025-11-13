@@ -42,7 +42,8 @@ jobs:
             --junitxml=junit/test-results.xml \
             --cov=com \
             --cov-report=xml \
-            --cov-report=html > pytest_output.log 2>&1
+            --cov-report=html \
+            > pytest_output.log 2>&1
 
       - name: Ladda upp pytest log
         if: always() && failure() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.log_errors == 'true'))
