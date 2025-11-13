@@ -30,10 +30,13 @@ jobs:
         with:
           python-version: '3.11'
       
+      - name: Installera paket
+        run: pip install -r requirements.txt
+      
       - name: Kör pytest
         run: |
-          pip install pytest pytest-cov
-          pytest test_wether_integration.py test_wether_unitest.py \
+            echo "$GREETINGS"
+            pytest test_wether_integration.py test_wether_unitest.py \
             --doctest-modules \
             --junitxml=junit/test-results.xml \
             --cov=com \
@@ -44,5 +47,5 @@ jobs:
         if: always() && failure() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.log_errors == 'true'))
         uses: actions/upload-artifact@v4
         with:
-          name: pytest log
+          name: pytest-log
           path: pytest_output.log
