@@ -35,13 +35,14 @@ jobs:
       
       - name: Kör pytest
         run: |
-            echo "$GREETINGS"
-            pytest test_wether_integration.py test_wether_unitest.py \
+          echo "$GREETINGS"
+          pytest test_wether_integration.py test_wether_unitest.py \
             --doctest-modules \
             --junitxml=junit/test-results.xml \
             --cov=com \
             --cov-report=xml \
-            --cov-report=html > pytest_output.log 2>&1
+            --cov-report=html \
+            2>&1 | tee pytest_output.log
 
       - name: Ladda upp pytest log
         if: always() && failure() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.log_errors == 'true'))
