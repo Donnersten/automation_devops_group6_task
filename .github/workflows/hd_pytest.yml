@@ -1,4 +1,3 @@
-
 name: pytest
 
 on:
@@ -17,8 +16,8 @@ on:
           - "false"
 
 env:
- APP_NAME: wether-app 
- GREETINGS: "Kör tester"
+  APP_NAME: wether-app 
+  GREETINGS: "Kör tester"
 
 jobs:
   test:
@@ -31,39 +30,22 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Install requirements
-        run: pip install -r requirements.txt
-
-      - name: Run tests
+      - name: Installera paket
+        run: pip install -r ../requirements.txt
+      
+      - name: Kör pytest
         run: |
-          echo "$GREETINGS"
-          pytest test_wether_integration.py test_wether_unitest.py test_fail.py
+            echo "$GREETINGS"
+            pytest test_wether_integration.py test_wether_unitest.py \
+            --doctest-modules \
+            --junitxml=junit/test-results.xml \
+            --cov=com \
+            --cov-report=xml \
+            --cov-report=html > pytest_output.log 2>&1
 
-  build:
-    runs-on: ubuntu-latest
-    needs: test 
-    if: success() 
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build Docker images
-        run: echo "Tester misslyckades, logg sparad." > error_log.txt
-          
-  log_error:
-     runs-on: ubuntu-latest
-     needs: test 
-     if: failure() && github.event.inputs.log_errors == 'true'
-     steps:
-       - uses: actions/checkout@v4
-       - name: Skapar loggfil 
-         run: |
-           pytest -v > error_log.txt 2>&1 || true
-
-
-       - name: Ladda upp logg som artefakt
-         uses: actions/upload-artifact@v4
-         with:
-          name: Pytest error log
-          path: error_log.txt
-    
-    
- 
+      - name: Ladda upp pytest log
+        if: always() && failure() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.log_errors == 'true'))
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-log
+          path: pytest_output.log
