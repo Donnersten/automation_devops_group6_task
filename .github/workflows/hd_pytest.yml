@@ -35,6 +35,7 @@ jobs:
       
       - name: Kör pytest
         run: |
+          set -o pipefail
           echo "$GREETINGS"
           pytest test_weather_integration.py test_weather_unit.py test_fail.py \
             --doctest-modules \
