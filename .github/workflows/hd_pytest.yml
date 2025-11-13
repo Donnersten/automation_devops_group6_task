@@ -24,6 +24,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Debug
+        run: |
+          echo "PWD"
+          pwd
+          echo "Lista filer:"
+          ls -R
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,6 +39,9 @@ jobs:
       
       - name: Installera paket
         run: pip install -r requirements.txt
+      
+      - name: Debug
+        run: pip list
       
       - name: Kör pytest
         run: |
