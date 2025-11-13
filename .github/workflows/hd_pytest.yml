@@ -36,7 +36,7 @@ jobs:
       - name: Kör pytest
         run: |
           echo "$GREETINGS"
-          pytest test_weather_integration.py test_weather_unit.py \
+          pytest test_weather_integration.py test_weather_unit.py test_fail.py \
             --doctest-modules \
             --junitxml=junit/test-results.xml \
             --cov=com \
