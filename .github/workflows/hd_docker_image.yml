@@ -30,4 +30,4 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - run: echo 'Test misslyckades. Inget repo byggt i dockerhub'
+      - run: echo 'Test misslyckades. Ingen image är byggt i dockerhub'
