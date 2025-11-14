@@ -17,7 +17,7 @@ on:
 
 env:
   APP_NAME: wether-app 
-  GREETINGS: "Kör tester"
+  TEST_RUN: "Kör tester"
 
 jobs:
   test:
@@ -35,7 +35,7 @@ jobs:
       
       - name: Kör pytest
         run: |
-          echo "$GREETINGS"
+          echo "$TEST_RUN"
           pytest test_wether_integration.py test_wether_unitest.py \
            > pytest_output.log 2>&1
 
