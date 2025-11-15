@@ -2,7 +2,7 @@ name: pytest
 
 on:
   push:
-    branches: [ hd_de24 ]
+    branches: [ main ]
   
   workflow_dispatch:
     inputs:
